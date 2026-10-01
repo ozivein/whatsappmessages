@@ -200,6 +200,37 @@ export default function HomePage() {
           setMessages(normalizedMsgs);
           setMySenderName(stored.mySenderName === "Şüheda" ? "Şüheda" : "Oğuzhan");
           setMediaBlobs(stored.mediaBlobs || {});
+        } else {
+          // Hafızada yoksa: Gömülü 600.000 mesajlık sohbeti otomatik yükle!
+          try {
+            const res = await fetch("/data/chat.txt");
+            if (res.ok) {
+              const rawText = await res.text();
+              const { messages: parsedMsgs } = parseWhatsAppText(rawText);
+              const normalizedMsgs = parsedMsgs.map((m) => ({
+                ...m,
+                sender:
+                  m.sender.toLowerCase().includes("oğuzhan") ||
+                  m.sender.toLowerCase().includes("oguzhan")
+                    ? "Oğuzhan"
+                    : "Şüheda",
+              }));
+
+              setMessages(normalizedMsgs);
+              setMySenderName("Oğuzhan");
+              setDisplayCount(200);
+
+              // Cihazın IndexedDB hafızasına kaydet (bir daha indirmeye gerek kalmasın)
+              saveChatToStorage({
+                messages: normalizedMsgs,
+                participants: ["Oğuzhan", "Şüheda"],
+                mySenderName: "Oğuzhan",
+                mediaBlobs: {},
+              });
+            }
+          } catch (fetchErr) {
+            console.log("Preloaded chat fetch hatası:", fetchErr);
+          }
         }
 
         if (savedStarred && savedStarred.length > 0) {
@@ -442,13 +473,19 @@ export default function HomePage() {
   // İlk Açılış Kontrolü (Splash Screen)
   if (isInitializing) {
     return (
-      <div className="h-screen w-screen flex flex-col items-center justify-center bg-[#0b141a] text-[#e9edef] whatsapp-bg">
-        <div className="relative w-16 h-16 rounded-3xl bg-gradient-to-tr from-rose-500 to-amber-500 flex items-center justify-center shadow-2xl mb-4 animate-bounce">
-          <Heart className="w-8 h-8 text-white fill-white" />
+      <div className="h-screen w-screen flex flex-col items-center justify-center bg-[#0b141a] text-[#e9edef] whatsapp-bg p-6 text-center select-none">
+        <div className="relative w-20 h-20 rounded-3xl bg-gradient-to-tr from-rose-500 to-amber-500 flex items-center justify-center shadow-2xl mb-5 animate-bounce">
+          <Heart className="w-10 h-10 text-white fill-white" />
         </div>
-        <h2 className="text-lg font-semibold tracking-tight">Anı Kapsülü Açılıyor...</h2>
-        <p className="text-xs text-[#8696a0] mt-1 flex items-center gap-1.5">
-          <Database className="w-3.5 h-3.5 text-[#00a884]" /> Hafızadaki anılar yükleniyor
+        <h2 className="text-xl font-bold tracking-tight text-white mb-1.5">
+          Oğuzhan &amp; Şüheda
+        </h2>
+        <p className="text-sm text-rose-400 font-medium mb-1">
+          Bizim Hikayemiz Hazırlanıyor... ❤️
+        </p>
+        <p className="text-xs text-[#8696a0] flex items-center justify-center gap-1.5 mt-2">
+          <Loader2 className="w-3.5 h-3.5 text-[#00a884] animate-spin" />
+          <span>5 yıllık anılarınız ve konuşmalarınız yükleniyor</span>
         </p>
       </div>
     );
