@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111b21"/>
+      <stop offset="100%" stop-color="#0b141a"/>
+    </linearGradient>
+    <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff4081"/>
+      <stop offset="50%" stop-color="#e91e63"/>
+      <stop offset="100%" stop-color="#00a884"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Arka Plan Yuvarlak Kare (iOS App Icon) -->
+  <rect width="512" height="512" rx="115" fill="url(#bg)"/>
+  <rect width="504" height="504" x="4" y="4" rx="112" fill="none" stroke="#2a3942" stroke-width="4"/>
+
+  <!-- WhatsApp Yeşil Halka -->
+  <circle cx="256" cy="256" r="160" fill="none" stroke="#00a884" stroke-width="12" stroke-dasharray="8 6" opacity="0.4"/>
+
+  <!-- Parlayan Kalp İkonu -->
+  <path
+    d="M256 410s-150-96-150-202c0-58 45-104 104-104 42 0 74 24 88 56 14-32 46-56 88-56 59 0 104 46 104 104 0 106-150 202-150 202z"
+    fill="url(#heartGrad)"
+    filter="url(#glow)"
+  />
+</svg>
