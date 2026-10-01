@@ -86,7 +86,7 @@ export function InstallModal({ isOpen, onClose }: InstallModalProps) {
                 <Smartphone className="w-3.5 h-3.5 text-rose-400" />
               </p>
               <p className="text-[#8696a0] text-[11px] mt-0.5">
-                Başlık otomatik olarak <b>Bizim Hikayemiz ❤️</b> gelecektir. Ekle&apos;ye bastığınızda uygulama telefonunuza yüklenir!
+                Başlık otomatik olarak <b>Anı Kapsülü ❤️</b> gelecektir. Ekle&apos;ye bastığınızda uygulama telefonunuza yüklenir!
               </p>
             </div>
           </div>

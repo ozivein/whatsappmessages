@@ -2,8 +2,8 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Bizim Hikayemiz ❤️",
-    short_name: "Hikayemiz",
+    name: "Anı Kapsülü ❤️",
+    short_name: "Anı Kapsülü",
     description: "Oğuzhan & Şüheda WhatsApp Anı Kapsülü",
     start_url: "/",
     display: "standalone",

@@ -481,7 +481,7 @@ export default function HomePage() {
           Oğuzhan &amp; Şüheda
         </h2>
         <p className="text-sm text-rose-400 font-medium mb-1">
-          Bizim Hikayemiz Hazırlanıyor... ❤️
+          Anı Kapsülümüz Hazırlanıyor... ❤️
         </p>
         <p className="text-xs text-[#8696a0] flex items-center justify-center gap-1.5 mt-2">
           <Loader2 className="w-3.5 h-3.5 text-[#00a884] animate-spin" />

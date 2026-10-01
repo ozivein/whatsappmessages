@@ -161,7 +161,7 @@ export function StatsTab({
           <Heart className="w-7 h-7 fill-rose-500" />
         </div>
         <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-          Bizim Hikayemiz &bull; İlişki Özeti
+          Anı Kapsülü &bull; İlişki Özeti
         </h2>
         <p className="text-xs text-[#8696a0] mt-1">
           {stats.firstMsgDate} &mdash; {stats.lastMsgDate} tarihleri arasındaki aşk yolculuğumuz

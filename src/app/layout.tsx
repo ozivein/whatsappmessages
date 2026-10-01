@@ -2,13 +2,13 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Bizim Hikayemiz ❤️",
+  title: "Anı Kapsülü ❤️",
   description: "Oğuzhan & Şüheda WhatsApp Anı Kapsülü",
-  applicationName: "Bizim Hikayemiz",
+  applicationName: "Anı Kapsülü",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Hikayemiz",
+    title: "Anı Kapsülü",
   },
   formatDetection: {
     telephone: false,
@@ -35,7 +35,7 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Hikayemiz" />
+        <meta name="apple-mobile-web-app-title" content="Anı Kapsülü" />
       </head>
       <body className="h-full w-full bg-[#0b141a] text-[#e9edef] antialiased selection:bg-[#00a884] selection:text-white overflow-hidden overscroll-none">
         {children}
