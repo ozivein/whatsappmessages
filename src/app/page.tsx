@@ -16,9 +16,11 @@ import { Lightbox } from "@/components/Lightbox";
 import { StatsTab } from "@/components/StatsTab";
 import { GalleryTab } from "@/components/GalleryTab";
 import { InstallModal } from "@/components/InstallModal";
+import { LockScreen } from "@/components/LockScreen";
 import {
   Upload,
   Heart,
+  Lock,
   RotateCcw,
   UserCheck,
   ChevronDown,
@@ -161,6 +163,33 @@ export default function HomePage() {
   // Sıfırlama Onay Modalı State'i
   const [showResetConfirm, setShowResetConfirm] = useState<boolean>(false);
   const [isInstallModalOpen, setIsInstallModalOpen] = useState<boolean>(false);
+
+  // Şifre Kilit Ekranı State'i (PIN: 0708)
+  const [isUnlocked, setIsUnlocked] = useState<boolean>(false);
+
+  // Tarayıcı oturumu kilit kontrolü (sessionStorage)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const unlocked = sessionStorage.getItem("capsule_unlocked");
+      if (unlocked === "true") {
+        setIsUnlocked(true);
+      }
+    }
+  }, []);
+
+  const handleUnlock = () => {
+    setIsUnlocked(true);
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("capsule_unlocked", "true");
+    }
+  };
+
+  const handleLock = () => {
+    setIsUnlocked(false);
+    if (typeof window !== "undefined") {
+      sessionStorage.removeItem("capsule_unlocked");
+    }
+  };
 
   // Lightbox Modal State
   const [lightbox, setLightbox] = useState<{
@@ -470,6 +499,11 @@ export default function HomePage() {
     return messages.slice(-displayCount);
   }, [messages, filteredMessages, searchQuery, selectedDate, showOnlyStarred, displayCount]);
 
+  // 1. PIN Kilit Ekranı (Şifre: 0708)
+  if (!isUnlocked) {
+    return <LockScreen onUnlock={handleUnlock} />;
+  }
+
   // İlk Açılış Kontrolü (Splash Screen)
   if (isInitializing) {
     return (
@@ -652,6 +686,15 @@ export default function HomePage() {
               title="iPhone'a Uygulama Olarak Yükle"
             >
               <Smartphone className="w-4 h-4" />
+            </button>
+
+            {/* Uygulamayı Kilitle */}
+            <button
+              onClick={handleLock}
+              className="p-2 bg-[#111b21] hover:bg-[#2a3942] border border-[#2a3942] text-[#8696a0] hover:text-amber-400 rounded-lg transition"
+              title="Kapsülü Kilitle"
+            >
+              <Lock className="w-4 h-4" />
             </button>
 
             {/* Sıfırla / Yeni Yükle (Modal Açıcı) */}
